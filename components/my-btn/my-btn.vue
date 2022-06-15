@@ -42,37 +42,13 @@
 			<!--tabbar 功能  -->
 			<view class="aside-tabbar">
 				<!-- 搜索 -->
-				<view class="aside-tabbar-item">
-					<uni-icons color="#fff" custom-prefix="iconfont" type="icon-search_list_light" size="18">
-					</uni-icons>
-					<text>Search</text>
-				</view>
-				<!-- /home -->
-				<view class="aside-tabbar-item" @click="switchPageHome">
-					<uni-icons color="#fff" custom-prefix="iconfont" type="icon-home" size="18"></uni-icons>
-					<text>Home</text>
-				</view>
-				<!-- 文章 -->
-				<view class="aside-tabbar-item">
-					<uni-icons color="#fff" custom-prefix="iconfont" type="icon-article-line" size="18"></uni-icons>
-					<text>Article</text>
-				</view>
-				<!--热点 -->
-				<view class="aside-tabbar-item">
-					<uni-icons color="#fff" custom-prefix="iconfont" type="icon-me" size="18"></uni-icons>
-					<text>Hot</text>
-				</view>
-				<!-- 技术栈 -->
-				<view class="aside-tabbar-item">
-					<uni-icons color="#fff" custom-prefix="iconfont" type="icon-particlemovement" size="18"></uni-icons>
-					<text>Stack</text>
-				</view>
-				<!-- my -->
-				<view class="aside-tabbar-item">
-					<uni-icons color="#fff" custom-prefix="iconfont" type="icon-My" size="18"></uni-icons>
-					<text>My</text>
-				</view>
-
+				<block v-for="(item,i) in list" :key="i">
+					<navigator  class="aside-tabbar-item" :open-type="item.openType" :url="item.pagePath">
+						<uni-icons color="#fff" custom-prefix="iconfont" :type="item.iconPath" size="18">
+						</uni-icons>
+						<text>{{item.text}}</text>
+					</navigator>
+				</block>
 			</view>
 		</view>
 	</view>
@@ -88,8 +64,44 @@
 		name: "my-btn",
 		data() {
 			return {
-				
-
+				// 侧边栏数据
+				list: [{
+						"pagePath": "/subpkg/my_search/my_search",
+						"text": "Search",
+						"iconPath": "icon-search_list_light",
+						"openType": "navigate"
+					},
+					{
+						"pagePath": "/pages/home/home",
+						"text": "Home",
+						"iconPath": "icon-home",
+						"openType": "switchTab"
+					},
+					{
+						"pagePath": "/pages/cate/cate",
+						"text": "Article",
+						"iconPath": "icon-article-line",
+						"openType": "switchTab"
+					},
+					{
+						"pagePath": "/pages/hot/hot",
+						"text": "Hot",
+						"iconPath": "icon-me",
+						"openType": "switchTab"
+					},
+					{
+						"pagePath": "/subpkg/my_stack/my_stack",
+						"text": "Stack",
+						"iconPath": "icon-particlemovement",
+						"openType": "navigate"
+					},
+					{
+						"pagePath": "/pages/my/my",
+						"text": "My",
+						"iconPath": "icon-My",
+						"openType": "switchTab"
+					}
+				]
 			};
 		},
 		computed: {
@@ -99,20 +111,20 @@
 		},
 		methods: {
 			// 导入aside.js 中的方法
-			...mapMutations('m_aside', ['updateBtnActive','updateBtnActiveFalse']),
+			...mapMutations('m_aside', ['updateBtnActive', 'updateBtnActiveFalse']),
 			// 改变当前按钮状态
 			changeActive() {
 				this.updateBtnActive(!this.btnActive)
-		},
-		// 跳转页面
-		switchPageHome() {
-			uni.switchTab({
-				url: '/pages/my/my'
-			})
-			// 更新btnActive 状态 关闭侧边栏
-			this.updateBtnActiveFalse()
+			},
+			// 跳转页面
+			switchPageHome() {
+				uni.switchTab({
+					url: '/pages/my/my'
+				})
+				// 更新btnActive 状态 关闭侧边栏
+				this.updateBtnActiveFalse()
+			}
 		}
-	}
 	}
 </script>
 
@@ -165,6 +177,7 @@
 	}
 
 	.btn-aside {
+		z-index: 99999;
 		//     transform: translate3d(-300px, 0px, 0px);
 		position: fixed;
 		top: 0;

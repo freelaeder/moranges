@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<h1>hot</h1>
+		<h1>my-search</h1>
 	</view>
 </template>
 
