@@ -14,6 +14,8 @@
 </script>
 
 <style lang="scss">
+	// 引入阿里字体
+	@import '@/static/iconfont/iconfont.css';
 	/*每个页面公共css */
 	@import '@/uni_modules/uni-scss/index.scss';
 	/* #ifndef APP-NVUE */
