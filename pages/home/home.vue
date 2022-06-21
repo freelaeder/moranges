@@ -255,6 +255,7 @@
 											<image class="owns-body-pic" mode="heightFix" :src="item.defaultImg || defaultPic"></image>
 											<!-- 个人nickname -->
 											<text class="owns-nickname">{{item.nickName}}</text>
+											<!-- 个人信息描述 -->
 											<text class="owns-desc">{{item.lastName}}</text>
 										</view>
 									</view>
