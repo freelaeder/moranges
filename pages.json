@@ -2,7 +2,10 @@
 	"pages": [{
 		"path": "pages/home/home",
 		"style": {
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": false,
+			"app-plus": {
+				"bounce": "none"
+			}
 		}
 
 	}, {
@@ -37,6 +40,24 @@
                 }
                 ,{
                     "path" : "my_stack/my_stack",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "my-detail/my-detail",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "my_web/my_web",
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "",

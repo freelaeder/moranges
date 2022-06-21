@@ -18,7 +18,7 @@ wx.$http = $http
 // 在 uni-app 项目中，可以把 $http 挂载到 uni 顶级对象之上，方便全局调用
 uni.$http = $http
 //配置请求根路径
-$http.baseUrl = 'https://api-hmugo-web.itheima.net'
+$http.baseUrl = 'http://139.196.43.234:9001'
 
 // 展示 loading 效果
 $http.beforeRequest = function(options) {
@@ -39,6 +39,22 @@ uni.$showMsg = function(title = '数据加载失败！', duration = 1500) {
 		icon: 'none',
 	})
 }
+
+
+
+
+// import hljs from 'highlight.js'
+// import 'highlight.js/styles/a11y-dark.css' // 这里可以切换不同的主题
+
+// Vue.directive('highlight',function (el) {
+//     let blocks = el.querySelectorAll('pre code');
+//     setTimeout(() =>{
+//         blocks.forEach((block)=>{
+// 			hljs.highlightBlock(block)
+//         })
+//     }, 200)
+// })
+
 App.mpType = 'app'
 
 const app = new Vue({

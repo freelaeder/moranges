@@ -2,13 +2,60 @@
   font-family: "iconfont"; /* Project id 3465193 */
   src:  url('/static/iconfont/iconfont.ttf') format('truetype');
 }
-
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gongwenbao01:before {
+  content: "\e62a";
+}
+
+.icon-dizhi:before {
+  content: "\e61b";
+}
+
+.icon-paixing:before {
+  content: "\e60e";
+}
+
+.icon-taiyang:before {
+  content: "\e635";
+}
+
+.icon-todo-line:before {
+  content: "\e8d5";
+}
+
+.icon-Phone:before {
+  content: "\e608";
+}
+
+.icon-rili:before {
+  content: "\e662";
+}
+
+.icon-wangyuanjing:before {
+  content: "\e793";
+}
+
+.icon-email:before {
+  content: "\e63f";
+}
+
+.icon-book:before {
+  content: "\e607";
+}
+
+.icon-smile:before {
+  content: "\e82e";
+}
+
+.icon-erji:before {
+  content: "\e641";
 }
 
 .icon-weixin:before {

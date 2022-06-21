@@ -6,17 +6,17 @@
 			<uni-icons type="closeempty" color="#fff" size="18" v-else></uni-icons>
 		</view>
 		<!-- 侧边栏 -->
-		<view class="btn-aside" :class="{active:btnActive}">
+		<view class="btn-aside" :class="{active:btnActive}" >
 			<!-- 头部 -->
 			<view class="aside-header">
 				<!-- 个人图片 -->
 				<view class="aside-pic">
-					<image src="http://demo.cssmoban.com:8020/cssthemes6/skk-0816-14/assets/img/profile-img.jpg">
+					<image class="aside-image" :src="userinfo.default_image" mode="heightFix">
 					</image>
 				</view>
 				<!-- 个人姓名 -->
 				<view class="aside-title">
-					Alex Smith
+					{{userinfo.username}}laeder
 				</view>
 				<!-- 个人社交图标 -->
 				<view class="aside-icons">
@@ -40,13 +40,13 @@
 				</view>
 			</view>
 			<!--tabbar 功能  -->
-			<view class="aside-tabbar">
+			<view class="aside-tabbar" >
 				<!-- 搜索 -->
 				<block v-for="(item,i) in list" :key="i">
 					<navigator  class="aside-tabbar-item" :open-type="item.openType" :url="item.pagePath">
 						<uni-icons color="#fff" custom-prefix="iconfont" :type="item.iconPath" size="18">
 						</uni-icons>
-						<text>{{item.text}}</text>
+						<text class="aside-item-text">{{item.text}}</text>
 					</navigator>
 				</block>
 			</view>
@@ -107,6 +107,7 @@
 		computed: {
 			// 导入aside.js 中的state
 			...mapState('m_aside', ['btnActive']),
+			...mapState('m_user',['userinfo'])
 
 		},
 		methods: {
@@ -132,14 +133,14 @@
 	// <!-- 功能按钮 -->
 	.btn-container {
 		position: fixed;
-		top: 65rpx;
+		top: 85rpx;
 		right: 65rpx;
-		width: 65rpx;
-		height: 65rpx;
-		background: #077ecd;
+		width: 85rpx;
+		background: #00b26a;
 		border-radius: 50%;
 		text-align: center;
-		line-height: 65rpx;
+		line-height: 85rpx;
+		z-index: 9999;
 	}
 
 	// 盒子进入的动画
@@ -172,7 +173,7 @@
 	// 侧边栏
 	.btn-aside.active {
 		clip-path: ellipse(150% 70% at 0% 50%);
-		animation: aside-move ease 1.5s;
+		animation: aside-move ease-out 1.5s;
 
 	}
 
@@ -204,7 +205,7 @@
 				border-radius: 50%;
 				overflow: hidden;
 
-				image {
+				.aside-image {
 					width: 100%;
 					height: 100%;
 
@@ -219,11 +220,16 @@
 
 			// 社交图标
 			.aside-icons {
+				align-self: center;
 				.icons-items {
-					width: 100rpx;
-					height: 100rpx;
-					margin-right: 25rpx;
+					display: inline-block;
+					width: 80rpx;
+					height: 80rpx;
+					margin-right: 20rpx;
 					box-shadow: 1px 1px 5px #fff;
+					border-radius: 50%;
+					text-align: center;
+					line-height: 80rpx;
 				}
 			}
 		}
@@ -235,6 +241,8 @@
 			justify-content: space-between;
 			align-items: center;
 			overflow: hidden;
+			height: 60vh;
+			max-height: 60vh;
 
 			.aside-tabbar-item {
 				width: 100%;
@@ -242,7 +250,7 @@
 				// border: 1px solid;
 				padding-left: 65rpx;
 
-				text {
+				.aside-item-text {
 					padding-left: 35rpx;
 				}
 			}
