@@ -11,7 +11,7 @@
 	}, {
 		"path": "pages/cate/cate",
 		"style": {
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": true
 		}
 
 	}, {

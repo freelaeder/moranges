@@ -266,15 +266,6 @@
 
 	}
 
-	// .uni-collapse-item__title-box{
-	// 	background: #007aff !important;
-	// }
-
-	// 文章 tag active激活样式
-	// .content-tags-items-active {
-	// 	background-color: blueviolet !important; 
-	// }
-
 	// 文章页 css
 
 	.funtion-add {
