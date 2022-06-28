@@ -2,19 +2,33 @@
 	<view class="detail-container">
 		<!-- header -->
 		<view class="detail-header">
-
+			<img class="detail-pic" :src="articleDetail.cover_url || defaultPic" alt="">
 		</view>
 		<!-- body -->
 		<view class="detail-body">
 			<!-- uparse -->
-			<scroll-view scroll-y="true" style="height: 400px;">
+			<scroll-view scroll-y="true" style="height: 60vh;">
 				<u-parse :content=" articleDetail.blog_content" @preview="preview" @navigate="navigate"></u-parse>
 			</scroll-view>
 		</view>
 
 		<!-- footer -->
-		<view class="detail-footer">
-
+		<view class="detail-footer" v-if="articleDetail.blog_content">
+			<view slot="actions" class="card-actions no-border">
+				<view class="card-actions-item" @click="actionsClick('分享')">
+					<uni-icons class="detail-footer-icons" type="redo" size="20" color="#fff"></uni-icons>
+					<text class="card-actions-item-text">分享</text>
+				</view>
+				<view class="card-actions-item" @click="actionsClick('点赞')"  >
+					<uni-icons class="detail-footer-icons" type="hand-up-filled" size="20"
+						:color="handUp ? '#C00000' :'#fff' "></uni-icons>
+					<text class="card-actions-item-text">点赞 {{ 0 || articleDetail.clicks}}</text>
+				</view>
+				<view class="card-actions-item" @click="actionsClick('评论')">
+					<uni-icons class="detail-footer-icons" type="chatbubble" size="20" color="#fff"></uni-icons>
+					<text class="card-actions-item-text">评论</text>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -31,6 +45,12 @@
 				query: '',
 				// 文章详情
 				articleDetail: [],
+				// 图片不展示的默认图片
+				defaultPic: 'http://mail.freelaeder.cn/img/wallseven/wallseven12.png',
+				// 是否点赞
+				handUp: false,
+				// 点赞节流阀
+				isHandUp: false
 
 
 
@@ -67,6 +87,7 @@
 					"<img style='width:80vw;height:398rpx;display:block'").replace(reg2,
 					"<p style= 'white-space:pre-wrap' ")
 				this.articleDetail = res.data[0]
+				console.log(this.articleDetail);
 			},
 			// 点击富文本链接
 			async navigate(href, e) {
@@ -85,9 +106,33 @@
 			// 点击富文本图片
 			preview(src, e) {
 				// do something
-				console.log(src, e, '00000');
+				// console.log(src, e, '00000');
 
 			},
+			//点击底部分享 点赞 评论
+			actionsClick(e) {
+				if (e == '点赞') {
+					// 如果isHandUp 为true 代表上一次的点击事件正在执行
+					if (this.isHandUp) return uni.$showMsg('您点赞太快了，请等等哦')
+					this.isHandUp = true
+					setTimeout(() => {
+						this.handUp = !this.handUp
+						// 显示点赞状态
+						if (this.handUp) {
+							this.articleDetail.clicks += 1
+							uni.$showMsg('点赞成功')
+						} else {
+							this.articleDetail.clicks += -1
+							uni.$showMsg('取消点赞')
+						}
+						this.isHandUp = false
+					}, 1000)
+				}else{
+					uni.$showMsg(`暂不支持${e}`)
+				}
+
+			}
+
 		}
 	}
 </script>
@@ -96,25 +141,64 @@
 	@import url("@/components/u-parse/u-parse.css");
 
 	.detail-container {
-		border: 1px solid;
 
 		.detail-header {
 			width: 100vw;
 			height: 340rpx;
-			background: pink;
+
+			.detail-pic {
+				width: 100%;
+				display: block;
+
+			}
 		}
 
 		.detail-body {
+			margin-top: 4vh;
+			// border-bottom: 1px solid;
 			display: flex;
 			justify-content: flex-start;
 			flex-wrap: wrap;
 			margin-left: 15px;
+			margin-right: 15px;
 			white-space: pre-wrap;
 			// overflow: hidden;
 			background-color: #fff;
 			border-radius: 10px;
+			box-shadow: 0px 5px 5px #383838;
 		}
 
-		.detail-footer {}
+		.detail-footer {
+			background-color: #077ecd;
+			// margin-top: 5vh;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100vw;
+
+			.card-actions {
+				height: 6vh;
+				line-height: 6vh;
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+
+				.card-actions-item {
+					display: flex;
+					align-items: center;
+
+					.card-actions-item-text {
+						color: #fff;
+						padding-left: 4px;
+						display: inline-block;
+						vertical-align: top;
+					}
+				}
+			}
+		}
+
+		.uni-icons {
+			vertical-align: bottom !important;
+		}
 	}
 </style>

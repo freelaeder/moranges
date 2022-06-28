@@ -80,13 +80,9 @@
 			// 点击切换options
 			changeOptions(e) {
 				// 根据点击的下标获取对应的关键词进行获取对应的文章
-				this.queryArticles.key = this.items[e.currentIndex]
+				console.log(e.key);
+				this.queryArticles.key = e.key
 				// console.log(this.queryArticles);
-				// 暂时置为空
-				// 暂时置为空
-				// 暂时置为空
-
-				// this.articlesList=[]
 				this.getArticles(this.queryArticles)
 			}
 		}

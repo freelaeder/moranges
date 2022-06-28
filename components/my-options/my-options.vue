@@ -11,6 +11,7 @@
 					<!-- home end -->
 					<!-- 如果是文章页显示以下内容 -->
 					<view class="funtion-add" v-if="add">
+						<!-- 顶部分栏选项 -->
 						<uni-segmented-control class="itemss" :current="current" :values="defaultOptions"
 							:style-type="styleType" :active-color="activeColor" @clickItem="onClickItem" />
 						<!-- 添加功能按钮 -->
@@ -61,7 +62,7 @@
 					</view>
 					<view v-if="current === 1">
 						<block v-for="(item, i) in articlesList" :key="i">
-							<view class="articles-item">
+							<view class="articles-item" @click="gotoDetail(item)">
 								<!-- img -->
 								<view class="articles-pic">
 									<image class="articles-img" :src="item.cover_url || defaultPic"></image>
@@ -80,7 +81,7 @@
 					</view>
 					<view v-if="current === 2">
 						<block v-for="(item, i) in articlesList" :key="i">
-							<view class="articles-item">
+							<view class="articles-item" @click="gotoDetail(item)">
 								<!-- img -->
 								<view class="articles-pic">
 									<image class="articles-img" :src="item.cover_url || defaultPic"></image>
@@ -99,7 +100,26 @@
 					</view>
 					<view v-if="current === 3">
 						<block v-for="(item, i) in articlesList" :key="i">
-							<view class="articles-item">
+							<view class="articles-item" @click="gotoDetail(item)">
+								<!-- img -->
+								<view class="articles-pic">
+									<image class="articles-img" :src="item.cover_url || defaultPic"></image>
+								</view>
+								<!-- 标签 -->
+								<view class="tag-view">
+									<uni-tag :text="item.blog_title" type="warning" />
+								</view>
+								<!-- 底部介绍 -->
+								<view class="articles-bottom">
+									<text class="articles-title">{{item.blog_summary}}
+									</text>
+								</view>
+							</view>
+						</block>
+					</view>
+					<view v-if="current === 4">
+						<block v-for="(item, i) in articlesList" :key="i">
+							<view class="articles-item" @click="gotoDetail(item)">
 								<!-- img -->
 								<view class="articles-pic">
 									<image class="articles-img" :src="item.cover_url || defaultPic"></image>
@@ -151,8 +171,11 @@
 		},
 		data() {
 			return {
+				// 分栏选项的默认选中项下标
 				current: 0,
-				colorIndex: 0,
+				// 分栏选项的默认选中项名字
+				// 必须设置默认，第一次不会加载
+				currentTagName: 'html',
 				activeColor: '#007aff',
 				styleType: 'button',
 				// 默认图片
@@ -199,9 +222,18 @@
 			// 点击切换options
 			onClickItem(e) {
 				if (this.current !== e.currentIndex) {
+					// 改变默认下标
 					this.current = e.currentIndex
+					// 获取当前分栏默认选中的关键词
+					const key = this.defaultOptions[e.currentIndex]
+					// 设置当前的关键词
+					this.currentTagName = key
+					console.log('当前的key', this.currentTagName);
 					// 触发父组件事件
-					this.$emit('changeOptions', e)
+					this.$emit('changeOptions', {
+						e: e,
+						key: key
+					})
 				}
 			},
 			// 点击文章跳转文章详情页
@@ -227,13 +259,26 @@
 					if (this.defaultOptions.length === 5) {
 						return uni.$showMsg('分类不可以超过5个 \n 可以再次点击取消选中 ❤️')
 					}
+					// 添加点击的数据
 					this.defaultOptions.push(activeTag.tagname)
+					
 				} else {
-					// 如果添加
-					if(this.defaultOptions.length == 1){
+					// 如果已添加 就删除当前点击哪一项
+					if (this.defaultOptions.length == 1) {
+						// 让默认的下标重置为0
+						this.current =0
 						return uni.$showMsg('分类不可以小于1个')
 					}
+					// 判断是不是当前下标，如果是，则不删除
+					if (this.currentTagName == activeTag.tagname) return uni.$showMsg('不可以删除当前选中的下标！')
+
+					// 过滤删除
 					this.defaultOptions = this.defaultOptions.filter(x => x !== activeTag.tagname)
+					// 改变活跃状态下标 nice
+					// 思路：通过每次删除遍历，动态修改current下标
+					// 返回第一个值的下标
+					this.current = this.defaultOptions.findIndex(x => x == this.currentTagName)
+					
 				}
 				// 改变状态
 				this.fullOptions.filter(x => x.id == e.id)[0].tagtype = !activeTag.tagtype
