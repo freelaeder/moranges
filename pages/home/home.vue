@@ -23,7 +23,7 @@
 				<!-- 个人图片 -->
 				<view class="about-desc">
 					<image class="about-pic"
-						src="http://demo.cssmoban.com:8020/cssthemes6/skk-0816-14/assets/img/profile-img.jpg"
+						src="https://s1.ax1x.com/2022/06/21/jSYQqP.png"
 						mode="widthFix"></image>
 					<!-- 个人详细信息 -->
 					<view class="about-developer">
@@ -496,7 +496,7 @@
 		max-width: 100vw;
 		width: 100vw;
 		height: 100vh;
-		background: url(http://demo.cssmoban.com:8020/cssthemes6/skk-0816-14/assets/img/hero-bg.jpg) center;
+		background: url(https://s1.ax1x.com/2022/05/20/OO5Z4g.png) center;
 		background-size: cover;
 
 		.home-body-box {
@@ -795,6 +795,7 @@
 					}
 
 					.owns-top-triangle {
+						transform: translateY(-2px);
 						box-sizing: border-box;
 						width: 0;
 						height: 0;

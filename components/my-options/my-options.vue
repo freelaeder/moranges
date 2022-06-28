@@ -1,19 +1,51 @@
 <template>
 	<view>
 		<view class="example-body">
+
 			<uni-section title="Article-Options" type="line">
 				<view class="uni-padding-wrap uni-common-mt">
-					<uni-segmented-control :current="current" :values="items" :style-type="styleType"
+					<!-- 顶部选择框 -->
+					<!-- 如果是home页显示一下内容 -->
+					<uni-segmented-control v-if="!add" :current="current" :values="items" :style-type="styleType"
 						:active-color="activeColor" @clickItem="onClickItem" />
+					<!-- home end -->
+					<!-- 如果是文章页显示以下内容 -->
+					<view class="funtion-add" v-if="add">
+						<uni-segmented-control class="itemss" :current="current" :values="defaultOptions"
+							:style-type="styleType" :active-color="activeColor" @clickItem="onClickItem" />
+						<!-- 添加功能按钮 -->
+						<uni-section title="请选择喜欢的分类(最多可展示5个)" type="line">
+							<uni-collapse accordion v-model="accordionVal" @change="change">
+								<!-- 列表折叠框 -->
+								<uni-collapse-item title="stack options">
+									<view class="content-options">
+										<!-- 滚动盒子 -->
+										<scroll-view scroll-y="true" style="height: 174rpx;">
+											<!-- tags box -->
+											<view class="content-tags">
+												<!-- 循环渲染tags -->
+												<block v-for="(item,i) in fullOptions" :key="item.id">
+													<uni-tag class="content-tags-items content-tags-items-active"
+														size="default" :inverted="item.tagtype" :text="item.tagname"
+														type="primary" @click="setInverted(item)" />
+												</block>
+											</view>
+										</scroll-view>
+									</view>
+								</uni-collapse-item>
+							</uni-collapse>
+						</uni-section>
+					</view>
+
 				</view>
-				
+				<!-- 内容区域 -->
 				<view class="content">
 					<view v-if="current === 0">
 						<block v-for="(item, i) in articlesList" :key="i">
-							<view class="articles-item" @click="gotoDetail(item)" >
+							<view class="articles-item" @click="gotoDetail(item)">
 								<!-- img -->
 								<view class="articles-pic">
-									<image class="articles-img" :src="item.cover_url || defaultPic" ></image>
+									<image class="articles-img" :src="item.cover_url || defaultPic"></image>
 								</view>
 								<!-- 标签 -->
 								<view class="tag-view">
@@ -32,7 +64,7 @@
 							<view class="articles-item">
 								<!-- img -->
 								<view class="articles-pic">
-									<image class="articles-img" :src="item.cover_url || defaultPic" ></image>
+									<image class="articles-img" :src="item.cover_url || defaultPic"></image>
 								</view>
 								<!-- 标签 -->
 								<view class="tag-view">
@@ -70,7 +102,7 @@
 							<view class="articles-item">
 								<!-- img -->
 								<view class="articles-pic">
-									<image class="articles-img" :src="item.cover_url || defaultPic" ></image>
+									<image class="articles-img" :src="item.cover_url || defaultPic"></image>
 								</view>
 								<!-- 标签 -->
 								<view class="tag-view">
@@ -101,11 +133,20 @@
 				type: Array,
 				default: []
 			},
+			// 可选项
+			changItems: {
+				type: Array,
+				default: []
+			},
 			//接受分类
 			items: {
 				type: Array,
 				default: ['html', 'css', 'vue', 'python'],
-				
+			},
+			// 是否展示功能按钮
+			add: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
@@ -115,9 +156,44 @@
 				activeColor: '#007aff',
 				styleType: 'button',
 				// 默认图片
-				defaultPic: 'http://mail.freelaeder.cn/img/wallseven/wallseven%20(2).png'
+				defaultPic: 'http://mail.freelaeder.cn/img/wallseven/wallseven%20(2).png',
+				accordionVal: '1',
+				// 默认展示4条options
+				defaultOptions: [],
+				// 传递的全部options 处理之后
+				fullOptions: [],
+				// tags
+				inverted: false,
+
+
+
 
 			};
+		},
+		onReady() {
+			// 保存 items  
+			// 展示的items ，只展示4条
+			this.defaultOptions = this.items
+			// 处理items  items: ['html', 'css', 'vue2', 'node','javascript',
+			// 要处理的结果 【 {id: 1, name: "css", type: false}】
+
+			// 思路：处理不同的tagtype 合并在一起
+			const itemA = this.items.map((item, i) => {
+				return {
+					id: i,
+					tagname: item,
+					tagtype: false
+				}
+			})
+			const itemB = this.changItems.map((item, i) => {
+				return {
+					id: i + 4,
+					tagname: item,
+					tagtype: true
+				}
+			})
+			this.fullOptions = [...itemA, ...itemB]
+
 		},
 		methods: {
 			// 点击切换options
@@ -133,9 +209,40 @@
 				uni.navigateTo({
 					url: `/subpkg/my-detail/my-detail?uid=${e.uid}&title=${e.blog_title}`
 				})
-			}
+			},
+			// 
+			change(e) {
+				console.log(e);
+			},
+			// 点击tag
+			setInverted(e) {
+				// 保存当前点击的tag
+				const activeTag = this.fullOptions.filter(x => x.id == e.id)[0]
+				// 判断是不是已经点击过的
+				const findTag = this.defaultOptions.find(x => x == activeTag.tagname)
+
+				// 如果没有添加，
+				if (!findTag) {
+					// 判断分类不可以超过5个
+					if (this.defaultOptions.length === 5) {
+						return uni.$showMsg('分类不可以超过5个 \n 可以再次点击取消选中 ❤️')
+					}
+					this.defaultOptions.push(activeTag.tagname)
+				} else {
+					// 如果添加
+					if(this.defaultOptions.length == 1){
+						return uni.$showMsg('分类不可以小于1个')
+					}
+					this.defaultOptions = this.defaultOptions.filter(x => x !== activeTag.tagname)
+				}
+				// 改变状态
+				this.fullOptions.filter(x => x.id == e.id)[0].tagtype = !activeTag.tagtype
+
+
+			},
+
 		},
-		
+
 	}
 </script>
 
@@ -159,6 +266,44 @@
 
 	}
 
+	// .uni-collapse-item__title-box{
+	// 	background: #007aff !important;
+	// }
+
+	// 文章 tag active激活样式
+	// .content-tags-items-active {
+	// 	background-color: blueviolet !important; 
+	// }
+
+	// 文章页 css
+
+	.funtion-add {
+		width: 100%;
+		height: 440rpx;
+		// border: 1px solid #007aff;
+		border-radius: 10rpx;
+		overflow: hidden;
+		box-shadow: 0px 5px 15px royalblue;
+
+
+		.content-options {
+			height: 200rpx;
+
+			.content-tags {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-evenly;
+
+				.content-tags-items {
+					margin: 20rpx;
+					display: block;
+					min-width: 30rpx;
+
+				}
+			}
+		}
+	}
+
 	.content {
 		width: 81vw;
 		margin-top: 30px;
@@ -166,7 +311,7 @@
 
 		.articles-item {
 			display: flex;
-			height: 170px;
+			height: 360rpx;
 			border-radius: 10px;
 			border: 1px solid;
 			overflow: hidden;
@@ -181,7 +326,7 @@
 				width: 100%;
 				height: 100%;
 
-				.articles-img{
+				.articles-img {
 					width: 100%;
 					height: 100%;
 				}
