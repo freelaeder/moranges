@@ -12,6 +12,8 @@
 			</view>
 
 		</view>
+		<!-- 返回top -->
+		<my-backtop v-if="isShowBackTop" @arcticleToTop='arcticleToTop'></my-backtop>
 	</view>
 </template>
 
@@ -40,7 +42,9 @@
 				// 节流阀
 				isLoading: false,
 				// 文章总数
-				articlesTotal: 0
+				articlesTotal: 0,
+				// 是否展示backtop按钮
+				isShowBackTop:false
 
 
 			};
@@ -60,6 +64,16 @@
 			// 获取文章
 			this.getArticles(this.queryArticles)
 
+		},
+		// 监听页面滚动事件
+		onPageScroll(e) {
+			// console.log(e);
+			//如果滚动距离大于1000 展示backtop 按钮
+			if(e.scrollTop >= 1000){
+				this.isShowBackTop =true
+			}else{
+				this.isShowBackTop = false
+			}
 		},
 		methods: {
 			// 获取文章信息
@@ -84,6 +98,14 @@
 				this.queryArticles.key = e.key
 				// console.log(this.queryArticles);
 				this.getArticles(this.queryArticles)
+			},
+			// totop
+			arcticleToTop(e) {
+				// https://uniapp.dcloud.io/api/ui/scroll.html#pagescrollto
+				uni.pageScrollTo({
+					scrollTop: e,
+					duration: 600
+				});
 			}
 		}
 
@@ -95,6 +117,14 @@
 	// setup start
 	.uni-section {
 		background: #869803 !important;
+	}
+
+	.uni-section__content-title {
+		color: #fff !important;
+	}
+
+	.uni-collapse-item__title-text {
+		color: #fff !important;
 	}
 
 	// article-classification-container
