@@ -1,6 +1,8 @@
 <template>
 	<view class="my-backtop" @click="backToTop">
-		<uni-icons type="arrow-up" color="#fff" size="18"></uni-icons>
+		<uni-icons color="#fff" custom-prefix="iconfont" type="icon-back-top" size="18">
+		</uni-icons>
+		<!-- <uni-icons type="arrow-up" color="#fff" size="18"></uni-icons> -->
 	</view>
 </template>
 

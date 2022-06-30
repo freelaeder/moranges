@@ -5,7 +5,9 @@
 			"enablePullDownRefresh": false,
 			"app-plus": {
 				"bounce": "none"
-			}
+			},
+			"navigationStyle": "custom"
+			
 		}
 
 	}, {
@@ -82,25 +84,25 @@
 				"pagePath": "pages/home/home",
 				"text": "首页",
 				"iconPath": "static/tab_icons/home.png",
-				"selectedIconPath": "static/tab_icons/home-active.png"
+				"selectedIconPath": "static/tab_icons/home_h.png"
 			},
 			{
 				"pagePath": "pages/cate/cate",
 				"text": "文章",
-				"iconPath": "static/tab_icons/cate.png",
-				"selectedIconPath": "static/tab_icons/cate-active.png"
+				"iconPath": "static/tab_icons/catelog.png",
+				"selectedIconPath": "static/tab_icons/catelog_h.png"
 			},
 			{
 				"pagePath": "pages/hot/hot",
-				"text": "热点",
-				"iconPath": "static/tab_icons/cart.png",
-				"selectedIconPath": "static/tab_icons/cart-active.png"
+				"text": "归档",
+				"iconPath": "static/tab_icons/res.png",
+				"selectedIconPath": "static/tab_icons/res_h.png"
 			},
 			{
 				"pagePath": "pages/my/my",
 				"text": "我的",
 				"iconPath": "static/tab_icons/my.png",
-				"selectedIconPath": "static/tab_icons/my-active.png"
+				"selectedIconPath": "static/tab_icons/my_h.png"
 			}
 		]
 	}

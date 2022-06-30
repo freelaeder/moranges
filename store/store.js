@@ -9,7 +9,6 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	modules: {
-		// 挂载cart，使用 m_cart/cart
 		'm_aside': moduleAside,
 		'm_user': moduleUser,
 

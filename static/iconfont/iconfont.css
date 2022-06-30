@@ -2,12 +2,21 @@
   font-family: "iconfont"; /* Project id 3465193 */
   src:  url('/static/iconfont/iconfont.ttf') format('truetype');
 }
+
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tuichu:before {
+  content: "\e698";
+}
+
+.icon-back-top:before {
+  content: "\e696";
 }
 
 .icon-gongwenbao01:before {
