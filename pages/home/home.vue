@@ -1,272 +1,285 @@
 <template>
 	<view>
-		<!-- 功能按钮 -->
-		<my-btn></my-btn>
-		<!-- 文章主体 -->
-		<view class="home-container">
-			<!-- body -->
-			<view class="home-body-box">
-				<view class="home-title">
-					<text id="site-title">Alex Smith</text>
-					<text id="site-title">I'm {{userinfo.username}}laeder</text>
-				</view>
-			</view>
-			<!-- about -->
-			<view class="home-about-container">
-				<!-- 描述盒子 -->
-				<view class="about-title-box">
-					<text class="about-title">About</text>
-					<view class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. voluptates
-						soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
-						fugitsaepe corporis dicta a.</view>
-				</view>
-				<!-- 个人图片 -->
-				<view class="about-desc">
-					<image class="about-pic"
-						src="https://s1.ax1x.com/2022/06/21/jSYQqP.png"
-						mode="widthFix"></image>
-					<!-- 个人详细信息 -->
-					<view class="about-developer">
-						<view class="developer-title">
-							<view>UI/UX Designer & Web </view>
-							<text>Developer.</text>
-						</view>
-						<text class="developer-text">Lorem ipsum dolor sit amet, consectetur adipiscing elitsed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</text>
+		<view v-if="token">
+			<!-- 功能按钮 -->
+			<my-btn></my-btn>
+			<!-- 文章主体 -->
+			<view class="home-container">
+				<!-- body -->
+				<view class="home-body-box">
+					<view class="home-title">
+						<text id="site-title">Alex Smith</text>
+						<text id="site-title">I'm {{userinfo.username}}laeder</text>
 					</view>
-					<!--列表清单  -->
-					<view class="about-list">
-						<view class="about-list-item">
-							<uni-icons class='icons-items' color="#fff" type="right" size="16">
-							</uni-icons>
-							<text class="list-item-title">Birthday:</text>
-							<text class="list-text-desc">1 May 2000</text>
-						</view>
-						<view class="about-list-item">
-							<uni-icons class='icons-items' color="#fff" type="right" size="16">
-							</uni-icons>
-							<text class="list-item-title">Website:</text>
-							<text class="list-text-desc">mail.freelaeder.cn</text>
-						</view>
-						<view class="about-list-item">
-							<uni-icons class='icons-items' color="#fff" type="right" size="16">
-							</uni-icons>
-							<text class="list-item-title">Phone:</text>
-							<text class="list-text-desc">{{userinfo.mobile}}</text>
-						</view>
-						<view class="about-list-item">
-							<uni-icons class='icons-items' color="#fff" type="right" size="16">
-							</uni-icons>
-							<text class="list-item-title">City:</text>
-							<text class="list-text-desc">New York,USA</text>
-						</view>
-						<view class="about-list-item">
-							<uni-icons class='icons-items' color="#fff" type="right" size="16">
-							</uni-icons>
-							<text class="list-item-title">Age:</text>
-							<text class="list-text-desc">22</text>
-						</view>
-						<view class="about-list-item">
-							<uni-icons class='icons-items' color="#fff" type="right" size="16">
-							</uni-icons>
-							<text class="list-item-title">Degree:</text>
-							<text class="list-text-desc">Master</text>
-						</view>
-						<view class="about-list-item">
-							<uni-icons class='icons-items' color="#fff" type="right" size="16">
-							</uni-icons>
-							<text class="list-item-title">PhEmailone:</text>
-							<text class="list-text-desc">{{userinfo.email}}</text>
-						</view>
-						<view class="about-list-item">
-							<uni-icons class='icons-items' color="#fff" type="right" size="16">
-							</uni-icons>
-							<text class="list-item-title">Freelance:</text>
-							<text class="list-text-desc">Available</text>
-						</view>
-
-
-					</view>
-					<view class="about-title-box">
-						<!-- <text class="about-title">About</text> -->
-						<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							iustoquonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam
-							aliasfugitsaepe corporis dicta a.</text>
-					</view>
-
 				</view>
-			</view>
-			<!-- facts -->
-			<view class="facts-container">
-				<!-- 描述盒子 -->
-				<view class="about-title-box">
-					<text class="about-title">Facts</text>
-					<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi iusto
-						quonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
-						fugitsaepe corporis dicta a.</text>
-				</view>
-				<!-- count-box -->
-				<view class="count-box">
-					<view class="count-box-items">
-						<view class="box-item-container">
-							<uni-icons color="#fff" custom-prefix="iconfont" type="icon-smile" size="44">
-							</uni-icons>
-							<view class="count-box-desc">
-								<view class="box-desc-title">232</view>
-								<view class="box-desc-stange">Happy Clients</view>
-								<text class="box-desc-text"> consequuntur quae</text>
-							</view>
-						</view>
-					</view>
-					<view class="count-box-items">
-						<view class="box-item-container">
-							<uni-icons color="#fff" custom-prefix="iconfont" type="icon-book" size="44">
-							</uni-icons>
-							<view class="count-box-desc">
-								<view class="box-desc-title">521</view>
-								<view class="box-desc-stange">Projects </view>
-								<text class="box-desc-text"> adipisci atque cum quia aut </text>
-							</view>
-						</view>
-					</view>
-					<view class="count-box-items">
-						<view class="box-item-container">
-							<uni-icons color="#fff" custom-prefix="iconfont" type="icon-erji" size="44">
-							</uni-icons>
-							<view class="count-box-desc">
-								<view class="box-desc-title">1453</view>
-								<view class="box-desc-stange">Hours Of Support</view>
-								<text class="box-desc-text"> aut commodi quaerat </text>
-							</view>
-						</view>
-					</view>
-					<view class="count-box-items">
-						<view class="box-item-container">
-							<uni-icons color="#fff" type="staff" size="44"></uni-icons>
-							<view class="count-box-desc">
-								<view class="box-desc-title">32</view>
-								<view class="box-desc-stange">Hard Workers</view>
-								<text class="box-desc-text"> rerum asperiores</text>
-							</view>
-						</view>
-					</view>
-
-				</view>
-			</view>
-
-			<!-- skills -->
-			<view class="skills-container">
-				<!-- 描述盒子 -->
-				<view class="about-title-box">
-					<text class="about-title">Skills</text>
-					<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi iusto
-						quonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
-						fugitsaepe corporis dicta a.</text>
-				</view>
-				<!-- skill-item -->
-				<view class="skills-box">
-					<block v-for="(item,i) in skillsList" :key="i">
-						<view class="skills-item">
-							<view class="skill-title">
-								<text>{{item.skillName}}</text>
-								<text>{{item.percent}}%</text>
-							</view>
-							<view class="progress-box">
-								<progress :percent="item.percent" border-radius="14" stroke-width="10" color="#f38111"
-									active />
-							</view>
-						</view>
-					</block>
-				</view>
-
-			</view>
-			<!-- Resume -->
-			<view class="resume-container">
-				<!-- 描述盒子 -->
-				<view class="about-title-box">
-					<text class="about-title">Resume</text>
-					<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi iusto
-						quonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
-						fugitsaepe corporis dicta a.</text>
-				</view>
-				<!--步骤条  -->
-				<view class="setup-box">
-					<view class="setup-item">
-						<!-- row1 -->
-						<uni-section title="Summary">
-							<uni-steps :options="list1" active-icon="circle" direction="column" :active="active" />
-						</uni-section>
-						<!-- row2 -->
-						<uni-section title="Education">
-							<uni-steps :options="list2" active-icon="circle" direction="column" :active="active" />
-						</uni-section>
-						<!-- row3 -->
-						<uni-section title="Bachelor of fine arts & Graphic design">
-							<uni-steps :options="list2" active-icon="circle" direction="column" :active="active" />
-						</uni-section>
-					</view>
-
-				</view>
-				<!-- 文章页article classification -->
-				<view class="article-classification-container">
+				<!-- about -->
+				<view class="home-about-container">
 					<!-- 描述盒子 -->
 					<view class="about-title-box">
-						<text class="about-title">Article-Classification</text>
+						<text class="about-title">About</text>
+						<view class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. voluptates
+							soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
+							fugitsaepe corporis dicta a.</view>
+					</view>
+					<!-- 个人图片 -->
+					<view class="about-desc">
+						<image class="about-pic" src="https://s1.ax1x.com/2022/06/21/jSYQqP.png" mode="widthFix">
+						</image>
+						<!-- 个人详细信息 -->
+						<view class="about-developer">
+							<view class="developer-title">
+								<view>UI/UX Designer & Web </view>
+								<text>Developer.</text>
+							</view>
+							<text class="developer-text">Lorem ipsum dolor sit amet, consectetur adipiscing elitsed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							</text>
+						</view>
+						<!--列表清单  -->
+						<view class="about-list">
+							<view class="about-list-item">
+								<uni-icons class='icons-items' color="#fff" type="right" size="16">
+								</uni-icons>
+								<text class="list-item-title">Birthday:</text>
+								<text class="list-text-desc">1 May 2000</text>
+							</view>
+							<view class="about-list-item">
+								<uni-icons class='icons-items' color="#fff" type="right" size="16">
+								</uni-icons>
+								<text class="list-item-title">Website:</text>
+								<text class="list-text-desc">mail.freelaeder.cn</text>
+							</view>
+							<view class="about-list-item">
+								<uni-icons class='icons-items' color="#fff" type="right" size="16">
+								</uni-icons>
+								<text class="list-item-title">Phone:</text>
+								<text class="list-text-desc">{{userinfo.mobile}}</text>
+							</view>
+							<view class="about-list-item">
+								<uni-icons class='icons-items' color="#fff" type="right" size="16">
+								</uni-icons>
+								<text class="list-item-title">City:</text>
+								<text class="list-text-desc">New York,USA</text>
+							</view>
+							<view class="about-list-item">
+								<uni-icons class='icons-items' color="#fff" type="right" size="16">
+								</uni-icons>
+								<text class="list-item-title">Age:</text>
+								<text class="list-text-desc">22</text>
+							</view>
+							<view class="about-list-item">
+								<uni-icons class='icons-items' color="#fff" type="right" size="16">
+								</uni-icons>
+								<text class="list-item-title">Degree:</text>
+								<text class="list-text-desc">Master</text>
+							</view>
+							<view class="about-list-item">
+								<uni-icons class='icons-items' color="#fff" type="right" size="16">
+								</uni-icons>
+								<text class="list-item-title">PhEmailone:</text>
+								<text class="list-text-desc">{{userinfo.email}}</text>
+							</view>
+							<view class="about-list-item">
+								<uni-icons class='icons-items' color="#fff" type="right" size="16">
+								</uni-icons>
+								<text class="list-item-title">Freelance:</text>
+								<text class="list-text-desc">Available</text>
+							</view>
+
+
+						</view>
+						<view class="about-title-box">
+							<!-- <text class="about-title">About</text> -->
+							<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+								iustoquonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam
+								aliasfugitsaepe corporis dicta a.</text>
+						</view>
+
+					</view>
+				</view>
+				<!-- facts -->
+				<view class="facts-container">
+					<!-- 描述盒子 -->
+					<view class="about-title-box">
+						<text class="about-title">Facts</text>
 						<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi iusto
 							quonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
 							fugitsaepe corporis dicta a.</text>
 					</view>
-					<!-- article-clssification-box -->
-					<view class="article-classification-box">
-						<!-- 分类选项 -->
-						<view class="article-options">
-							<!-- 使用组件 -->
-							<!-- 传递参数 items渲染的options articlesList 渲染的文章列表 -->
-							<my-options :items="items" @changeOptions="changeOptions" :articlesList='articlesList'>
-							</my-options>
+					<!-- count-box -->
+					<view class="count-box">
+						<view class="count-box-items">
+							<view class="box-item-container">
+								<uni-icons color="#027bff" custom-prefix="iconfont" type="icon-smile" size="44">
+								</uni-icons>
+								<view class="count-box-desc">
+									<view class="box-desc-title">232</view>
+									<view class="box-desc-stange">Happy Clients</view>
+									<text class="box-desc-text"> consequuntur quae</text>
+								</view>
+							</view>
+						</view>
+						<view class="count-box-items">
+							<view class="box-item-container">
+								<uni-icons color="#027bff" custom-prefix="iconfont" type="icon-book" size="44">
+								</uni-icons>
+								<view class="count-box-desc">
+									<view class="box-desc-title">521</view>
+									<view class="box-desc-stange">Projects </view>
+									<text class="box-desc-text"> adipisci atque cum quia aut </text>
+								</view>
+							</view>
+						</view>
+						<view class="count-box-items">
+							<view class="box-item-container">
+								<uni-icons color="#027bff" custom-prefix="iconfont" type="icon-erji" size="44">
+								</uni-icons>
+								<view class="count-box-desc">
+									<view class="box-desc-title">1453</view>
+									<view class="box-desc-stange">Hours Of Support</view>
+									<text class="box-desc-text"> aut commodi quaerat </text>
+								</view>
+							</view>
+						</view>
+						<view class="count-box-items">
+							<view class="box-item-container">
+								<uni-icons color="#027bff" type="staff" size="44"></uni-icons>
+								<view class="count-box-desc">
+									<view class="box-desc-title">32</view>
+									<view class="box-desc-stange">Hard Workers</view>
+									<text class="box-desc-text"> rerum asperiores</text>
+								</view>
+							</view>
 						</view>
 
 					</view>
-
 				</view>
-				<!-- testimonials  -->
-				<view class="testimonial-container">
+
+				<!-- skills -->
+				<view class="skills-container">
 					<!-- 描述盒子 -->
 					<view class="about-title-box">
-						<text class="about-title">Article-Classification</text>
+						<text class="about-title">Skills</text>
 						<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi iusto
 							quonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
 							fugitsaepe corporis dicta a.</text>
 					</view>
-					<!-- testimonial-box -->
-					<view class="testimonial-box">
-						<swiper class="my-swipers"  indicator-active-color="#0000ff"  :indicator-dots="true" circular :autoplay="true" :interval="5000"
-							:duration="1000">
-							<block v-for="(item,i) in OwnsInfo" :key="i">
-								<swiper-item>
-									<view class="swiper-item">
-										<view class="swipers-top">
-											<text class="owns-top-desc">{{item.desc}}</text>
-										</view>
-										<view class="owns-top-triangle">
-										</view>
-										<view class="swipers-body">
-											<image class="owns-body-pic" mode="heightFix" :src="item.defaultImg || defaultPic"></image>
-											<!-- 个人nickname -->
-											<text class="owns-nickname">{{item.nickName}}</text>
-											<!-- 个人信息描述 -->
-											<text class="owns-desc">{{item.lastName}}</text>
-										</view>
-									</view>
-								</swiper-item>
-							</block>
-						</swiper>
+					<!-- skill-item -->
+					<view class="skills-box">
+						<block v-for="(item,i) in skillsList" :key="i">
+							<view class="skills-item">
+								<view class="skill-title">
+									<text>{{item.skillName}}</text>
+									<text>{{item.percent}}%</text>
+								</view>
+								<view class="progress-box">
+									<progress :percent="item.percent" border-radius="14" stroke-width="10"
+										color="#f38111" active />
+								</view>
+							</view>
+						</block>
 					</view>
 
 				</view>
-			</view>
+				<!-- Resume -->
+				<view class="resume-container">
+					<!-- 描述盒子 -->
+					<view class="about-title-box">
+						<text class="about-title">Resume</text>
+						<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi iusto
+							quonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
+							fugitsaepe corporis dicta a.</text>
+					</view>
+					<!--步骤条  -->
+					<view class="setup-box">
+						<view class="setup-item">
+							<!-- row1 -->
+							<uni-section title="Summary">
+								<uni-steps :options="list1" active-icon="circle" direction="column" :active="active" />
+							</uni-section>
+							<!-- row2 -->
+							<uni-section title="Education">
+								<uni-steps :options="list2" active-icon="circle" direction="column" :active="active" />
+							</uni-section>
+							<!-- row3 -->
+							<uni-section title="Bachelor of fine arts & Graphic design">
+								<uni-steps :options="list2" active-icon="circle" direction="column" :active="active" />
+							</uni-section>
+						</view>
 
+					</view>
+					<!-- 文章页article classification -->
+					<view class="article-classification-container">
+						<!-- 描述盒子 -->
+						<view class="about-title-box">
+							<text class="about-title">Article-Classification</text>
+							<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+								iusto
+								quonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
+								fugitsaepe corporis dicta a.</text>
+						</view>
+						<!-- article-clssification-box -->
+						<view class="article-classification-box">
+							<!-- 分类选项 -->
+							<view class="article-options">
+								<!-- 使用组件 -->
+								<!-- 传递参数 items渲染的options articlesList 渲染的文章列表 -->
+								<my-options :items="items" @changeOptions="changeOptions" :articlesList='articlesList'>
+								</my-options>
+							</view>
+
+						</view>
+
+					</view>
+					<!-- testimonials  -->
+					<view class="testimonial-container">
+						<!-- 描述盒子 -->
+						<view class="about-title-box">
+							<text class="about-title">Article-Classification</text>
+							<text class="about-descword">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+								iusto
+								quonihil voluptates soluta id, veritatis vero neque vel nam unde natus ipsa magnam alias
+								fugitsaepe corporis dicta a.</text>
+						</view>
+						<!-- testimonial-box -->
+						<view class="testimonial-box">
+							<swiper class="my-swipers" indicator-active-color="#0000ff" :indicator-dots="true" circular
+								:autoplay="true" :interval="5000" :duration="1000">
+								<block v-for="(item,i) in OwnsInfo" :key="i">
+									<swiper-item>
+										<view class="swiper-item">
+											<view class="swipers-top">
+												<text class="owns-top-desc">{{item.desc}}</text>
+											</view>
+											<view class="owns-top-triangle">
+											</view>
+											<view class="swipers-body">
+												<image class="owns-body-pic" mode="heightFix"
+													:src="item.defaultImg || defaultPic"></image>
+												<!-- 个人nickname -->
+												<text class="owns-nickname">{{item.nickName}}</text>
+												<!-- 个人信息描述 -->
+												<text class="owns-desc">{{item.lastName}}</text>
+											</view>
+										</view>
+									</swiper-item>
+								</block>
+							</swiper>
+						</view>
+
+					</view>
+				</view>
+
+			</view>
+		</view>
+		</block>
+		<!-- 当用户没有登录的时候显示 -->
+		<view class="loginout-container" v-else>
+			<image class="loginout-pic" src="http://139.196.43.234:9001/static/img/2022-06-02/333.svg" mode="">
+			</image>
+			<view class="loginout-tips">
+				不妨停下匆匆的脚步，来营造自己的一方天地
+			</view>
 		</view>
 	</view>
 </template>
@@ -337,61 +350,61 @@
 				items: ['html', 'css', 'vue', 'pythons'],
 				defaultPic: 'http://mail.freelaeder.cn/img/wallseven/wallseven%20(2).png',
 				// 轮播图个人信息
-				OwnsInfo:[{
-					// 姓名
-					nickName:'Sara Wilsson',
-					// 个人描述
-					desc:'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.',
-					// 名字
-					lastName:'Designer',
-					// 用户头像
-					defaultImg:'http://mail.freelaeder.cn/img/wallseven/wallseven%20(8).png',
-					
-				},
-				{
-					// 姓名
-					nickName:'Saul Goodman',
-					// 个人描述
-					desc:'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper',
-					// 名字
-					lastName:'Ceo & Founder',
-					// 用户头像
-					defaultImg:'http://mail.freelaeder.cn/img/wallseven/wallseven%20(9).png',
-					
-				},
-				{
-					// 姓名
-					nickName:'Jena Karlis',
-					// 个人描述
-					desc:'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.',
-					// 名字
-					lastName:'Store Owner',
-					// 用户头像
-					defaultImg:'http://mail.freelaeder.cn/img/picfive/wallfive%20(23).png',
-					
-				},
-				{
-					// 姓名
-					nickName:'Matt Brandon',
-					// 个人描述
-					desc:'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.',
-					// 名字
-					lastName:'Freelancer',
-					// 用户头像
-					defaultImg:'http://mail.freelaeder.cn/img/picfive/wallfive%20(20).png',
-					
-				},
-				{
-					// 姓名
-					nickName:'John Larson',
-					// 个人描述
-					desc:'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.',
-					// 名字
-					lastName:'Entrepreneur',
-					// 用户头像
-					defaultImg:'http://mail.freelaeder.cn/img/picfive/wallfive%20(22).png',
-					
-				}
+				OwnsInfo: [{
+						// 姓名
+						nickName: 'Sara Wilsson',
+						// 个人描述
+						desc: 'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.',
+						// 名字
+						lastName: 'Designer',
+						// 用户头像
+						defaultImg: 'http://mail.freelaeder.cn/img/wallseven/wallseven%20(8).png',
+
+					},
+					{
+						// 姓名
+						nickName: 'Saul Goodman',
+						// 个人描述
+						desc: 'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper',
+						// 名字
+						lastName: 'Ceo & Founder',
+						// 用户头像
+						defaultImg: 'http://mail.freelaeder.cn/img/wallseven/wallseven%20(9).png',
+
+					},
+					{
+						// 姓名
+						nickName: 'Jena Karlis',
+						// 个人描述
+						desc: 'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.',
+						// 名字
+						lastName: 'Store Owner',
+						// 用户头像
+						defaultImg: 'http://mail.freelaeder.cn/img/picfive/wallfive%20(23).png',
+
+					},
+					{
+						// 姓名
+						nickName: 'Matt Brandon',
+						// 个人描述
+						desc: 'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.',
+						// 名字
+						lastName: 'Freelancer',
+						// 用户头像
+						defaultImg: 'http://mail.freelaeder.cn/img/picfive/wallfive%20(20).png',
+
+					},
+					{
+						// 姓名
+						nickName: 'John Larson',
+						// 个人描述
+						desc: 'Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.',
+						// 名字
+						lastName: 'Entrepreneur',
+						// 用户头像
+						defaultImg: 'http://mail.freelaeder.cn/img/picfive/wallfive%20(22).png',
+
+					}
 				]
 
 			};
@@ -401,9 +414,13 @@
 			this.getUserInfo()
 			// 获取文章
 			this.getArticles(this.queryArticles)
+
+		},
+		onReady() {
+			uni.$showMsg('我打碎了夕阳,散做漫天的星光')
 		},
 		computed: {
-			...mapState('m_user', ['userinfo']),
+			...mapState('m_user', ['userinfo', 'token']),
 		},
 		methods: {
 			...mapMutations('m_user', ['updateUserInfo']),
@@ -456,7 +473,7 @@
 	// 修改setup样式
 	// setup start
 	.uni-section {
-		background: #9c9eff !important;
+		background: #faf9f4 !important;
 	}
 
 	.distraction {
@@ -470,7 +487,7 @@
 	}
 
 	.uni-steps__column-desc {
-		color: #fff !important;
+		color: #98928a !important;
 	}
 
 	.uni-steps__column-text {
@@ -490,6 +507,23 @@
 
 	// 设置盒子边框的padding
 	$box-padding-left:15px;
+
+	// 用户没有登录样式
+	.loginout-container {
+		width: 80vw;
+		margin: 0 auto;
+
+		.loginout-pic {
+			width: 100%;
+		}
+		.loginout-tips{
+			margin-top: 13vh;
+			text-align: center;
+			color: #98928a;
+			font-size: 23rpx;
+		}
+
+	}
 
 	.home-container {
 		max-height: 100vh;
@@ -580,8 +614,8 @@
 	.skills-container,
 	.facts-container,
 	.home-about-container {
-		background-color: #077ecd;
-		color: #fff;
+		background-color: #faf9f4;
+		color: #007aff;
 
 		// 描述盒子
 		.about-title-box {
@@ -614,6 +648,7 @@
 			}
 
 			.about-descword {
+				color: #98928a;
 				// display: block;
 				margin-top: 30px;
 				font-style: italic !important;
@@ -641,6 +676,7 @@
 				}
 
 				.developer-text {
+					color: #98928a;
 					font-style: italic !important;
 					font-size: 23rpx;
 					letter-spacing: 1rpx;
@@ -730,8 +766,8 @@
 
 	// setup-box 最后背景色一致的盒子
 	.resume-container {
-		background-color: #9c9eff;
-		
+		// background-color: #9c9eff;
+
 
 		&::after {
 			content: "";
@@ -740,13 +776,13 @@
 			height: 10px;
 			border-bottom-left-radius: 20rpx;
 			border-bottom-right-radius: 20rpx;
-			background-color: #9c9eff;
+			// background-color: #9c9eff;
 			overflow: hidden;
 		}
 	}
 
 	.setup-box {
-		background-color: #9c9eff;
+		// background-color: #9c9eff;
 	}
 
 	// article-classification-container
@@ -756,12 +792,12 @@
 	}
 
 	.article-classification-container {
-		background-color: #9c9eff;
+		// background-color: #9c9eff;
 	}
 
 	// testimonial-box 
 	.testimonial-container {
-		background-color: #9c9eff;
+		// background-color: #9c9eff;
 
 		.testimonial-box {
 			width: 100vw;
@@ -786,7 +822,7 @@
 						justify-content: space-between;
 						border-radius: 20rpx;
 						overflow: hidden;
-						border: 2px solid #0000ff;
+						border: 2px solid #007aff;
 
 						.owns-top-desc {
 							padding-top: 30rpx;
@@ -827,7 +863,7 @@
 
 						.owns-desc {
 							font-size: 13px;
-							color: #98928a;
+							color: #1b1a18;
 						}
 					}
 				}

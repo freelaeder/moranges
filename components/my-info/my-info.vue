@@ -37,14 +37,14 @@
 					<!-- 个人扩展的每一项 -->
 					<view class="expand-items">
 						<view class="expand-pic-warp">
-							<image class="expand-pics" src="@/static/design/comment.svg" mode="aspectFill" ></image>
+							<image class="expand-pics" src="https://s1.ax1x.com/2022/06/30/jM3t76.png" mode="aspectFill" ></image>
 						</view>
 						<text class="expand-desc">我的评论</text>
 					</view>
 					<!-- 个人扩展的每一项 -->
 					<view class="expand-items">
 						<view class="expand-pic-warp">
-							<image class="expand-pics" src="https://s1.ax1x.com/2022/06/30/jKx7jI.png" mode="aspectFill" ></image>
+							<image class="expand-pics" src="https://s1.ax1x.com/2022/06/30/jM38XR.png" mode="aspectFill" ></image>
 						</view>
 						<text class="expand-desc">我的关注</text>
 					</view>

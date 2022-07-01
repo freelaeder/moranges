@@ -1,24 +1,38 @@
 <template>
 	<view>
-		<!-- article-clssification-box -->
-		<view class="article-classification-box">
-			<!-- 分类选项 -->
-			<view class="article-options">
-				<!-- 使用组件 -->
-				<!-- 传递参数 items渲染的options articlesList 渲染的文章列表 文章列表页新增功能add   -->
-				<my-options :changItems='changItems' :items="items" :add="true" @changeOptions="changeOptions"
-					:articlesList='articlesList'>
-				</my-options>
-			</view>
+		<!-- 用户登录 -->
+		<view v-if="token">
+			<!-- article-clssification-box -->
+			<view class="article-classification-box">
+				<!-- 分类选项 -->
+				<view class="article-options">
+					<!-- 使用组件 -->
+					<!-- 传递参数 items渲染的options articlesList 渲染的文章列表 文章列表页新增功能add   -->
+					<my-options :changItems='changItems' :items="items" :add="true" @changeOptions="changeOptions"
+						:articlesList='articlesList'>
+					</my-options>
+				</view>
 
+			</view>
+			<!-- 返回top -->
+			<my-backtop v-if="isShowBackTop" @arcticleToTop='arcticleToTop'></my-backtop>
 		</view>
-		<!-- 返回top -->
-		<my-backtop v-if="isShowBackTop" @arcticleToTop='arcticleToTop'></my-backtop>
+		
+		<!-- 用户未登录 -->
+		<!-- https://s1.ax1x.com/2022/06/30/jMemTJ.png -->
+		<view class="loginout-container" v-else>
+			<image class="loginout-pic" src="https://s1.ax1x.com/2022/06/30/jMemTJ.png" >
+			</image>
+			<view class="loginout-tips">
+				如果你能读懂我的奇奇怪怪，那你一定会像我一样可可爱爱
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
 	import asideMix from '@/mixins/close-aside.js'
+	import {mapState} from 'vuex'
 	export default {
 		// 混合 aside 目的 点击侧边栏之后，修改btnActive 状态，保证再次返回不显示侧边栏
 		mixins: [asideMix],
@@ -44,7 +58,7 @@
 				// 文章总数
 				articlesTotal: 0,
 				// 是否展示backtop按钮
-				isShowBackTop:false
+				isShowBackTop: false
 
 
 			};
@@ -52,6 +66,9 @@
 		onLoad() {
 			// 获取文章
 			this.getArticles(this.queryArticles)
+		},
+		computed:{
+			...mapState('m_user',['token'])
 		},
 		onReachBottom() {
 			// 判断文章是不是全部加载完毕
@@ -69,9 +86,9 @@
 		onPageScroll(e) {
 			// console.log(e);
 			//如果滚动距离大于1000 展示backtop 按钮
-			if(e.scrollTop >= 1000){
-				this.isShowBackTop =true
-			}else{
+			if (e.scrollTop >= 1000) {
+				this.isShowBackTop = true
+			} else {
 				this.isShowBackTop = false
 			}
 		},
@@ -116,32 +133,57 @@
 	// 修改setup样式
 	// setup start
 	.uni-section {
-		background: #869803 !important;
+		// background: #869803 !important;
 	}
 
 	.uni-section__content-title {
-		color: #fff !important;
+		// color: #fff !important;
 	}
 
 	.uni-collapse-item__title-text {
-		color: #fff !important;
+		// color: #fff !important;
+	}
+	.uniui-bottom{
+		color: #002b59 !important;
+	}
+	// 用户没有登录样式
+	page{
+		background-color: #ffffff;
+	}
+	.loginout-container {
+		width: 80vw;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		.loginout-pic {
+			width: 100%;
+		}
+		.loginout-tips{
+			margin-top: 3vh;
+			text-align: center;
+			color: #98928a;
+			font-size: 23rpx;
+			letter-spacing: 1rpx;
+		}
+	
 	}
 
 	// article-classification-container
 	.article-classification-box {
 		display: flex;
 		justify-content: center;
-		background-color: #869803;
+		background-color: #e2d9ce;
 
 		.article-options {
 
 			// 设置下拉列表的color
 			.uni-collapse-item__title-box {
-				background-color: #007aff;
+				// background-color: #007aff;
 			}
 
 			.uni-collapse-item__title {
-				background-color: #007aff;
+				// background-color: #007aff;
 			}
 		}
 	}

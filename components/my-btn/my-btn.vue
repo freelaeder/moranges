@@ -133,7 +133,7 @@
 	// <!-- 功能按钮 -->
 	.btn-container {
 		position: fixed;
-		top: 85rpx;
+		top: 185rpx;
 		right: 65rpx;
 		width: 85rpx;
 		background: #00b26a;
