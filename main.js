@@ -18,7 +18,7 @@ wx.$http = $http
 // 在 uni-app 项目中，可以把 $http 挂载到 uni 顶级对象之上，方便全局调用
 uni.$http = $http
 //配置请求根路径
-$http.baseUrl = 'http://139.196.43.234:9001'
+$http.baseUrl = 'https://freelaeder.cn'
 
 // 展示 loading 效果
 $http.beforeRequest = function(options) {

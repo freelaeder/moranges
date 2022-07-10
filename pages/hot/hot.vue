@@ -40,7 +40,7 @@
 						</view>
 					</view>
 					<!-- 每一个分类项 -->
-					<view class="archive-cate-items">
+					<view class="archive-cate-items" @click="picClick">
 						<!-- 分类图片 -->
 						<view class="archive-pic-warp">
 							<image class="archive-pics" src="https://s1.ax1x.com/2022/06/30/jM3UAK.png" mode="widthFix"></image>
@@ -114,6 +114,13 @@
 			//点击全部
 			allClick(){
 				uni.$showMsg('点了全部')
+			},
+			// 点击了图片
+			picClick(){
+				uni.$showMsg('正在前往个人图片集')
+				uni.navigateTo({
+					url:"/subpkg/my_pics/my_pics"
+				})
 			}
 		}
 	}

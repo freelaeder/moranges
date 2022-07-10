@@ -275,7 +275,7 @@
 		</block>
 		<!-- 当用户没有登录的时候显示 -->
 		<view class="loginout-container" v-else>
-			<image class="loginout-pic" src="http://139.196.43.234:9001/static/img/2022-06-02/333.svg" mode="">
+			<image class="loginout-pic" src="http://139.196.43.234:20517/upload/png/2022-07-04/333.svg" mode="">
 			</image>
 			<view class="loginout-tips">
 				不妨停下匆匆的脚步，来营造自己的一方天地
@@ -479,7 +479,9 @@
 	.distraction {
 		color: #0b0fff !important;
 	}
-
+	.articles-title {
+		color: #fff !important;
+	}
 	.uni-steps__column-circle {
 		background-color: #3579ff !important;
 		width: 10px !important;

@@ -11,7 +11,7 @@
 			<view class="aside-header">
 				<!-- 个人图片 -->
 				<view class="aside-pic">
-					<image class="aside-image" :src="userinfo.default_image" mode="heightFix">
+					<image class="aside-image" :src="defaultPic" mode="heightFix">
 					</image>
 				</view>
 				<!-- 个人姓名 -->
@@ -101,7 +101,8 @@
 						"iconPath": "icon-My",
 						"openType": "switchTab"
 					}
-				]
+				],
+				defaultPic:'http://139.196.43.234:20517/upload/png/2022-07-04/6c98f0a0-fb84-11ec-b8a4-f571978054bf.png'
 			};
 		},
 		computed: {

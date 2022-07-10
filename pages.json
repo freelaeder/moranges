@@ -67,6 +67,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "my_pics/my_pics",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "个人图集",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 	}],
 	"globalStyle": {
