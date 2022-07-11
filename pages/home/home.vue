@@ -1,6 +1,7 @@
 <template>
 	<view>
-		<view v-if="token">
+		<!-- v-if="token" -->
+		<view >
 			<!-- 功能按钮 -->
 			<my-btn></my-btn>
 			<!-- 文章主体 -->
@@ -273,14 +274,14 @@
 			</view>
 		</view>
 		</block>
-		<!-- 当用户没有登录的时候显示 -->
-		<view class="loginout-container" v-else>
-			<image class="loginout-pic" src="http://139.196.43.234:20517/upload/png/2022-07-04/333.svg" mode="">
+		<!-- 当用户没有登录的时候显示  v-else -->
+		<!-- <view class="loginout-container">
+			<image class="loginout-pic" src="https://s1.ax1x.com/2022/07/11/jyjBGV.png" mode="">
 			</image>
 			<view class="loginout-tips">
 				不妨停下匆匆的脚步，来营造自己的一方天地
 			</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -416,14 +417,21 @@
 			this.getArticles(this.queryArticles)
 
 		},
-		onReady() {
+		onShow() {
+			// 获取用户信息
+			this.getUserInfo()
+			// 获取文章
+			this.getArticles(this.queryArticles)
 			uni.$showMsg('我打碎了夕阳,散做漫天的星光')
 		},
+		// onReady() {
+			
+		// },
 		computed: {
-			...mapState('m_user', ['userinfo', 'token']),
+			...mapState('m_user', ['userinfo', 'token','articlesAll']),
 		},
 		methods: {
-			...mapMutations('m_user', ['updateUserInfo']),
+			...mapMutations('m_user', ['updateUserInfo','updateAllArcticles']),
 			// 3. 获取用户信息的方法
 			async getUserInfo() {
 				// 3.1 发起请求
@@ -445,6 +453,8 @@
 				// 处理数据 只需要前四条数据
 				const resultArticles = res.data.result.slice(0, -5)
 				this.articlesList = resultArticles
+				// 持久保存文章总数
+				this.updateAllArcticles(res.data.total)
 			},
 			// 点击切换options
 			changeOptions(e) {
@@ -468,6 +478,7 @@
 
 	page {
 		box-sizing: border-box;
+		background-color: #fff;
 	}
 
 	// 修改setup样式
@@ -514,6 +525,7 @@
 	.loginout-container {
 		width: 80vw;
 		margin: 0 auto;
+		// background-color: #fff;
 
 		.loginout-pic {
 			width: 100%;

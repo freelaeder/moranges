@@ -22,13 +22,13 @@
 				<view class="expand-container">
 					<!-- 个人扩展的每一项 -->
 					<view class="expand-items">
-						<view class="expand-pic-warp">
+						<view class="expand-pic-warp"  >
 							<image class="expand-pics" src="https://s1.ax1x.com/2022/06/30/jKxnnP.png" mode="aspectFill" ></image>
 						</view>
 						<text class="expand-desc">技术栈</text>
 					</view>
 					<!-- 个人扩展的每一项 -->
-					<view class="expand-items">
+					<view class="expand-items" @click="gotoOwnImgs">
 						<view class="expand-pic-warp">
 							<image class="expand-pics" src="https://s1.ax1x.com/2022/06/30/jKx1hQ.png" mode="aspectFill" ></image>
 						</view>
@@ -127,8 +127,12 @@
 		computed: {
 			...mapState('m_user', ['wxUserinfo'])
 		},
+		onReady() {
+			// 获取个人图集
+			this.getOwnImgs()
+		},
 		methods: {
-			...mapMutations('m_user', ['updateWxUserInfo', 'updateToken']),
+			...mapMutations('m_user', ['updateWxUserInfo', 'updateToken','updateWxImgs','updateUserInfo','updateAllCountImgs','updateAllArcticles']),
 			async backout() {
 				const [err, succ] = await uni.showModal({
 					title: '提示',
@@ -137,9 +141,38 @@
 				// 用户确认了退出登录的操作
 				// 需要清空 vuex 中的 userinfo、token
 				if (succ && succ.confirm) {
+					// 清空缓存
 					this.updateWxUserInfo({})
 					this.updateToken('')
+					this.updateWxImgs('')
+					this.updateUserInfo({})
+					this.updateAllCountImgs('')
+					this.updateAllArcticles('')
+					this.updateAllArcticles('')
+					
 				}
+			},
+			// 获取个人图集
+			async getOwnImgs() {
+				const username = this.wxUserinfo.userInfo.nickName
+				const {
+					data: res
+				} = await uni.$http.get(`/wx/getImgs/${username}/`)
+				// 获取服务器图集保存
+				// this.imgLists = res.data
+				// console.log(this.imgLists,'data000000');
+				// console.log(res.data,'res.data');
+				// 持久化保存图集
+				this.updateWxImgs(res.data)
+				// 持久化保存图集总数
+				this.updateAllCountImgs(res.count)
+			},
+			// 点击前往个人图集
+			gotoOwnImgs(){
+				uni.$showMsg('正在前往个人图片集')
+				uni.navigateTo({
+					url:"/subpkg/my_pics/my_pics"
+				})
 			}
 		}
 	}

@@ -36,7 +36,7 @@
 						</view>
 						<!-- 分类数量 -->
 						<view class="archiver-number">
-							15
+							{{articlesAll}}
 						</view>
 					</view>
 					<!-- 每一个分类项 -->
@@ -51,7 +51,7 @@
 						</view>
 						<!-- 分类数量 -->
 						<view class="archiver-number">
-							10
+							{{allOwnImgs}}
 						</view>
 					</view>
 					<!-- 每一个分类项 -->
@@ -108,7 +108,7 @@
 			// uni.$showMsg('点击 我的，就可以登录了哟')
 		},
 		computed: {
-			...mapState('m_user', ['token', 'wxUserinfo'])
+			...mapState('m_user', ['token', 'wxUserinfo','allOwnImgs','articlesAll'])
 		},
 		methods:{
 			//点击全部

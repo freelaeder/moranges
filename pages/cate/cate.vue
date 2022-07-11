@@ -17,11 +17,11 @@
 			<!-- 返回top -->
 			<my-backtop v-if="isShowBackTop" @arcticleToTop='arcticleToTop'></my-backtop>
 		</view>
-		
+
 		<!-- 用户未登录 -->
 		<!-- https://s1.ax1x.com/2022/06/30/jMemTJ.png -->
 		<view class="loginout-container" v-else>
-			<image class="loginout-pic" src="https://s1.ax1x.com/2022/06/30/jMemTJ.png" >
+			<image class="loginout-pic" src="https://s1.ax1x.com/2022/06/30/jMemTJ.png">
 			</image>
 			<view class="loginout-tips">
 				如果你能读懂我的奇奇怪怪，那你一定会像我一样可可爱爱
@@ -32,7 +32,9 @@
 
 <script>
 	import asideMix from '@/mixins/close-aside.js'
-	import {mapState} from 'vuex'
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		// 混合 aside 目的 点击侧边栏之后，修改btnActive 状态，保证再次返回不显示侧边栏
 		mixins: [asideMix],
@@ -58,17 +60,24 @@
 				// 文章总数
 				articlesTotal: 0,
 				// 是否展示backtop按钮
-				isShowBackTop: false
-
-
+				isShowBackTop: false,
+				// 倒计时的秒数
+				seconds: 3,
+				// 定时器的 Id
+				timer: null
 			};
 		},
 		onLoad() {
 			// 获取文章
 			this.getArticles(this.queryArticles)
 		},
-		computed:{
-			...mapState('m_user',['token'])
+		onShow() {
+			if (!this.token) {
+				this.delayNavigate()
+			}
+		},
+		computed: {
+			...mapState('m_user', ['token'])
 		},
 		onReachBottom() {
 			// 判断文章是不是全部加载完毕
@@ -93,6 +102,41 @@
 			}
 		},
 		methods: {
+			// 展示倒计时的提示消息
+			// 延迟导航到 my 页面
+			// 延迟导航到 my 页面
+			delayNavigate() {
+			  // 把 data 中的秒数重置成 3 秒
+			  this.seconds = 3
+			  this.showTips(this.seconds)
+			
+			  this.timer = setInterval(() => {
+			    this.seconds--
+			
+			    if (this.seconds <= 0) {
+			      clearInterval(this.timer)
+			      uni.switchTab({
+			        url: '/pages/my/my'
+			      })
+			      return
+			    }
+			
+			    this.showTips(this.seconds)
+			  }, 1000)
+			},
+			showTips(n) {
+				// 调用 uni.showToast() 方法，展示提示消息
+				uni.showToast({
+					// 不展示任何图标
+					icon: 'none',
+					// 提示的消息
+					title:  n + ' 秒后自动跳转到登录页',
+					// 为页面添加透明遮罩，防止点击穿透
+					mask: true,
+					// 1.5 秒后自动消失
+					duration: 1500
+				})
+			},
 			// 获取文章信息
 			async getArticles(e) {
 				// 开启节流阀
@@ -143,30 +187,35 @@
 	.uni-collapse-item__title-text {
 		// color: #fff !important;
 	}
-	.uniui-bottom{
+
+	.uniui-bottom {
 		color: #002b59 !important;
 	}
+
 	// 用户没有登录样式
-	page{
+	page {
 		background-color: #ffffff;
 	}
+
 	.loginout-container {
 		width: 80vw;
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%,-50%);
+		transform: translate(-50%, -50%);
+
 		.loginout-pic {
 			width: 100%;
 		}
-		.loginout-tips{
+
+		.loginout-tips {
 			margin-top: 3vh;
 			text-align: center;
 			color: #98928a;
 			font-size: 23rpx;
 			letter-spacing: 1rpx;
 		}
-	
+
 	}
 
 	// article-classification-container
